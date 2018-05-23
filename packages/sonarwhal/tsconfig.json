@@ -1,14 +1,12 @@
 {
     "compilerOptions": {
-        "outDir": "dist"
+        "outDir": "dist",
+        "module": "esnext",
+        "declaration": false
     },
     "exclude": [
         "dist",
         "node_modules"
     ],
-    "extends": "../../tsconfig.json",
-    "include": [
-        "src/**/*.ts",
-        "tests/**/*.ts"
-    ]
+    "extends": "../../tsconfig.json"
 }
