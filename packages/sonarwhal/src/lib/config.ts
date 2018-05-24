@@ -18,7 +18,7 @@ import * as path from 'path';
 
 import * as browserslist from 'browserslist';
 import * as shell from 'shelljs';
-import * as _ from 'lodash';
+import { merge } from 'lodash-es';
 
 import { debug as d } from './utils/debug';
 import { UserConfig, IgnoredUrl, CLIOptions, ConnectorConfig, RulesConfigObject } from './types';
@@ -86,7 +86,7 @@ const composeConfig = (userConfig: UserConfig) => {
         return composeConfig(loadedConfiguration);
     });
 
-    const finalConfig = _.merge({}, ...configurations, userConfig);
+    const finalConfig = merge({}, ...configurations, userConfig);
 
     return finalConfig;
 };

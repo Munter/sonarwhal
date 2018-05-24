@@ -5,9 +5,12 @@ module.exports = () => {
     return {
         entry: {cli: './src/bin/sonarwhal'},
         externals: [
-            'iconv-loader'
+            'browserslist',
+            'encoding',
+            'require-uncached',
+            'update-notifier'
         ],
-        mode: 'development',
+        mode: 'production',
         module: {
             rules: [
                 {

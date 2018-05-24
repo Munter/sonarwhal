@@ -105,7 +105,7 @@ export const getInstalledResources = (type: ResourceType): Array<string> => {
     const resourcesFiles: Array<string> = globby.sync(`${NODE_MODULES_ROOT}/@sonarwhal/${type}-*/package.json`);
 
     const ids: Array<string> = resourcesFiles.reduce((list: Array<string>, resourceFile: string) => {
-        const resource = require(path.dirname(resourceFile));
+        const resource = eval(`require(path.dirname(${resourceFile}));`); //eslint-disable-line
         const packageName = JSON.parse(readFile(resourceFile)).name;
         const resourceName = packageName.substr(packageName.lastIndexOf('/') + 1).replace(`${type}-`, '');
 
@@ -142,9 +142,9 @@ export const tryToLoadFrom = (resourcePath: string): any => {
          * http://nodejs.org/dist/latest-v8.x/docs/api/modules.html#modules_all_together
          */
 
-        const resource = require(resourcePath);
+        const resource = eval(`require(${resourcePath});`); //eslint-disable-line
 
-        builder = resource.default || resource;
+        builder = (resource as any).default || resource;
     } catch (e) {
         debug(`Can't require ${resourcePath}`);
 
@@ -214,9 +214,9 @@ const generateConfigPathsToResources = (configurations: Array<string>, name: str
             const packageName = `${basePackagePath}${configuration}`;
 
             try {
-                const packagePath = path.dirname(require.resolve(packageName));
+                const packagePath = new Function('return path.dirname(require.resolve(packageName));'); //eslint-disable-line
 
-                const resourcePackages = globby.sync(`node_modules/{@sonarwhal/,sonarwhal-}${type}-${name}/package.json`, { absolute: true, cwd: packagePath }).map((pkg) => {
+                const resourcePackages = globby.sync(`node_modules/{@sonarwhal/,sonarwhal-}${type}-${name}/package.json`, { absolute: true, cwd: packagePath as any }).map((pkg) => {
                     return path.dirname(pkg);
                 });
 

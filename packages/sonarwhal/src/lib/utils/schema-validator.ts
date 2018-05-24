@@ -1,7 +1,8 @@
 import * as ajv from 'ajv';
-import * as _ from 'lodash';
-
+import { cloneDeep, forEach, groupBy, map, reduce, without } from 'lodash-es';
 import { SchemaValidationResult } from '../types';
+
+const _ = { cloneDeep, forEach, groupBy, map, reduce, without };
 
 /*
  * If we want to use the ajv types in TypeScript, we need to import

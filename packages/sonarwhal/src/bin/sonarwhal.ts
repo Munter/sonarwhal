@@ -1,4 +1,4 @@
-
+// Need a webpack plugin to add the shebang
 
 /**
  * @fileoverview Main CLI that is run via the sonarwhal command. Based on ESLint.

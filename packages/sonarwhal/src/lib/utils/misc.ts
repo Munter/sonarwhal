@@ -6,7 +6,7 @@ import { promisify } from 'util';
 import { parse as parseContentTypeHeader } from 'content-type';
 import * as shell from 'shelljs';
 
-import stripBom = require('strip-bom');
+import stripBom from 'strip-bom';
 import * as requireUncached from 'require-uncached';
 import * as stripComments from 'strip-json-comments';
 import * as requestAsync from 'request-promise';
@@ -347,12 +347,12 @@ const isOfficial = async (): Promise<boolean> => {
  * exception if no package is found
  */
 const getPackage = (pathString: string) => {
-    return require(`${pathString}/package.json`);
+    return eval(`require('${pathString}/package.json'));`) //eslint-disable-line
 };
 
 /** Returns an object that represents the `package.json` version of `sonarwhal` */
 const getSonarwhalPackage = () => {
-    return require(path.join(__dirname, '../../../../package.json'));
+    return eval(`require(path.join(__dirname, '../../../../package.json'));`)  //eslint-disable-line
 };
 
 /**

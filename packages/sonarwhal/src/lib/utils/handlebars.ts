@@ -1,4 +1,4 @@
-import * as path from 'path';
+import * as path from 'path'; //eslint-disable-line
 
 import * as Handlebars from 'handlebars';
 
@@ -8,7 +8,7 @@ import { findPackageRoot } from './misc';
 
 const debug = d(__filename);
 
-export const sonarwhalPackage = require(path.join(findPackageRoot(), 'package.json'));
+export const sonarwhalPackage = eval(`require(path.join(${findPackageRoot()}, 'package.json'));`); //eslint-disable-line
 
 /**
  * Searches the current version used for a package in `sonarwhal` and uses that version or the `defaultVersion`.

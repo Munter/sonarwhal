@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import { Sonarwhal } from '../sonarwhal';
 import { getAsUri } from '../utils/get-as-uri';
