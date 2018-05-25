@@ -10,7 +10,7 @@ module.exports = () => {
             'require-uncached',
             'update-notifier'
         ],
-        mode: 'production',
+        mode: 'development',
         module: {
             rules: [
                 {
