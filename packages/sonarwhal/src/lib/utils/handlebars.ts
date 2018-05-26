@@ -1,4 +1,4 @@
-import * as path from 'path'; //eslint-disable-line
+import { join } from 'path'; //eslint-disable-line
 
 import * as Handlebars from 'handlebars';
 
@@ -7,8 +7,13 @@ import { readFileAsync } from './misc';
 import { findPackageRoot } from './misc';
 
 const debug = d(__filename);
+const packageLocation = join(findPackageRoot(), 'package.json').replace(/\\/g, '\\\\');
 
-export const sonarwhalPackage = eval(`require(path.join(${findPackageRoot()}, 'package.json'));`); //eslint-disable-line
+debug(`Package location: ${packageLocation}`);
+
+export const sonarwhalPackage = eval(`require('${packageLocation}');`); //eslint-disable-line
+
+// export const sonarwhalPackage = require(join(findPackageRoot(), 'package.json'));
 
 /**
  * Searches the current version used for a package in `sonarwhal` and uses that version or the `defaultVersion`.

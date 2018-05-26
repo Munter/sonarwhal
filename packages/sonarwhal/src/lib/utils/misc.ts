@@ -248,6 +248,7 @@ const loadJSFile = (filePath: string): any => {
  * `No package found`.
  */
 const findPackageRoot = (dirname: string = __dirname, fileToFind: string = 'package.json'): string => {
+    debug(`Searching package.json in ${dirname}`);
     const content: Array<string> = readdir(dirname);
 
     if (content.includes(fileToFind)) {
@@ -257,6 +258,7 @@ const findPackageRoot = (dirname: string = __dirname, fileToFind: string = 'pack
     const parentFolder: string = path.resolve(dirname, '..');
 
     if (parentFolder === dirname) {
+        debug(`package.json not found in ${parentFolder}`);
         throw new Error('No package found');
     }
 
